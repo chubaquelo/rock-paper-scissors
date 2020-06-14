@@ -4,10 +4,103 @@
             Rock Paper Scissors Game!
         </title>
         <script>
+            function computerPlay(){
+                options = ["rock","paper","scissors"];
+                elected = Math.floor(Math.random() * options.length);
+                return options[elected];
+            }
             
+            function playRound(playerSelection ,computerSelection ) {
+                result = "SOME KIND OF ERROR";
+                playerSelection = playerSelection.toLowerCase();
+                switch(playerSelection){
+                    case "rock":
+                        if (playerSelection == "rock" && computerSelection == "rock") {
+                            result = "It's a Tie";
+                        } else if (playerSelection == "rock" && computerSelection == "paper") {
+                            result = "You Lose!"
+                        } else if (playerSelection == "rock" && computerSelection == "scissors") {
+                            result = "You Win!"
+                        } 
+                        
+
+                    case "paper":
+                        if (playerSelection == "paper" && computerSelection == "rock") {
+                            result = "You Win!";
+                        } else if (playerSelection == "paper" && computerSelection == "paper") {
+                            result = "It's a Tie"
+                        } else if (playerSelection == "paper" && computerSelection == "scissors") {
+                            result = "You Lose!"
+                        }
+
+                    case "scissors":
+                        if (playerSelection == "scissors" && computerSelection == "rock") {
+                            result = "You Lose!";
+                        } else if (playerSelection == "scissors" && computerSelection == "paper") {
+                            result = "You Win!"
+                        } else if (playerSelection == "scissors" && computerSelection == "scissors") {
+                            result = "It's a Tie"
+                        } 
+                }
+            
+                return result;
+            }
+
+            function game() {
+                var humanChoice = "";
+                
+                while (humanChoice != "paper" && humanChoice != "rock" && humanChoice != "scissors") {
+                    humanChoice = prompt("Input your choice (paper - scissors or rock): ").toLowerCase();
+                }
+
+                pcChoice = computerPlay();
+                roundResult = playRound(humanChoice, pcChoice);
+                return roundResult;
+            }
+
+// PLAY 5 TIMES
+            function Play() {
+                var lost = 0;
+                var won = 0;
+                var ties = 0;
+
+                for (i = 0; i < 5; i++){
+
+                    var ronda = game();
+                    turn = i+1;
+                    if (ronda == "You Lose!"){
+                        lost += 1;
+                        alert("Play N° "+ turn + ": You Lose!");
+                    } else if (ronda == "You Win!"){
+                        won += 1;
+                        alert("Play N° "+ turn + ": You Win!");
+                    } else {
+                        ties += 1;
+                        alert("Play N° "+ turn + ": It's a Tie!");
+                }
+            }
+
+            document.write("You won (times): " + won);
+            document.write("</br>You lost (times): " + lost);
+            document.write("</br>You tied (times): " + ties);
+            // console.log("You won (times): " + won);
+            // console.log("You lost (times): " + lost);
+            // console.log("You tied (times): " + ties);
+
+            if (won > lost && won >= ties) {
+                alert("Final Result: ¡¡¡You won!!!");
+                } else if (lost > won && lost >= ties) {
+                    alert("Final Result: ¡¡¡You Lost!!!"); 
+                } else if (won == lost) { 
+                    alert("Final Result: It's a TIE");
+                    }
+            }
         </script>
     </header>
     <body>
-
+        <div>
+            <h1>Remember You do need to open de Console to be able to see game results!! Thanks</h1>
+            <button onclick=Play();>PLAY</button>
+        </div>
     </body>
 </html>
